@@ -10,6 +10,10 @@
 		"commands": [{
 			"command": "fake.fakeBuild",
 			"title": "FAKE: Build"
+		},
+		{
+			"command": "fake.cancelBuild",
+			"title": "FAKE: Cancel"
 		}],
 		"outputChannels": [
 			"FAKE"
