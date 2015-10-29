@@ -8,11 +8,18 @@
 	"main": "./fake",
 	"contributes": {
 		"commands": [{
-			"command": "fake.sayHello",
-			"title": "Hello World"
-		}]
+			"command": "fake.fakeBuild",
+			"title": "FAKE: Build"
+		}],
+		"outputChannels": [
+			"FAKE"
+		]
 	},
 	"devDependencies": {
 		"vscode": "*"
+	},
+	"dependencies": {
+		"path": "*",
+    "toml": "*"
 	}
 }

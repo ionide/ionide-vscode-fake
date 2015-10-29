@@ -57,6 +57,17 @@ let translateModules (typ : System.Type) fileName =
     // from the provided type (just by calling one of the functions from the array)
     let moduleJS =
       [ yield "var vscode = require('vscode')"
+        yield "var child_process = require('child_process');"
+        yield "var toml = require('toml');"
+        yield "var fs = require('fs');"
+        yield "var window = {
+                    JSON: JSON,
+                    console: console,
+                    Promise : Promise,
+                    process: process,
+                    setTimeout: setTimeout,
+                    clearTimeout: clearTimeout };"
+        yield ""
         yield ""
         yield "function wrappedFunScript() { \n" + coreJS + "\n }"
         yield "var _funcs = wrappedFunScript();"
