@@ -37,7 +37,11 @@ module FakeService =
 
     let cancelBuild target =
         let build = BuildList |> Seq.find (fun t -> t.Name = target)
-        build.Process.kill ()
+        if Process.isWin () then
+            Process.spawn "taskkill" "" ("/pid " + build.Process.pid.ToString() + " /f /t")
+            |> ignore
+        else
+            build.Process.kill ()
         build.End <- Some DateTime.Now
 
     let buildHandle () =
