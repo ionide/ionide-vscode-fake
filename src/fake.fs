@@ -29,11 +29,18 @@ module FakeService =
 
     let private startBuild target =
         let outputChannel = window.Globals.getOutputChannel "FAKE"
+        outputChannel.clear ()
         let proc = Process.spawnWithNotification command linuxPrefix target outputChannel
-        let data = {Name = target; Start = DateTime.Now; End = None; Process = proc}
+        let data = {Name = (if target = "" then "Default" else target); Start = DateTime.Now; End = None; Process = proc}
         BuildList.Add data
-        proc.on("exit",unbox<Function>(fun _ -> data.End <- Some DateTime.Now)) |> ignore
+        proc.on("exit",unbox<Function>(fun (code : string) ->
+            if code ="0" then
+                window.Globals.showInformationMessage "Build completed" |> ignore
+            else
+                window.Globals.showErrorMessage "Build failed" |> ignore
+            data.End <- Some DateTime.Now)) |> ignore
         ()
+
 
     let cancelBuild target =
         let build = BuildList |> Seq.find (fun t -> t.Name = target)
@@ -45,7 +52,7 @@ module FakeService =
         build.End <- Some DateTime.Now
 
     let buildHandle () =
-        do loadParameters()
+        do loadParameters ()
         script
         |> Globals.readFileSync
         |> fun n -> (n.toString(), "Target \"([\\w.]+)\"")
@@ -66,10 +73,14 @@ module FakeService =
         |> Promise.toPromise
         |> Promise.success cancelBuild
 
+    let defaultHandle () =
+        do loadParameters ()
+        do startBuild ""
+
 type Fake() =
     member x.activate(state:obj) =
         let t = workspace.Globals.getPath ()
         commands.Globals.registerCommand("fake.fakeBuild", FakeService.buildHandle |> unbox<CommandCallback>) |> ignore
         commands.Globals.registerCommand("fake.cancelBuild", FakeService.cancelHandle |> unbox<CommandCallback>) |> ignore
-
+        commands.Globals.registerCommand("fake.buildDefault", FakeService.defaultHandle |> unbox<CommandCallback>) |> ignore
         ()

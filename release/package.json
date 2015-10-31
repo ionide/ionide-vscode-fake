@@ -14,10 +14,19 @@
 		{
 			"command": "fake.cancelBuild",
 			"title": "FAKE: Cancel"
+		},
+		{
+			"command": "fake.buildDefault",
+			"title": "FAKE: Build Default"
 		}],
 		"outputChannels": [
 			"FAKE"
-		]
+		],
+		"keybindings": [{
+        "command": "fake.buildDefault",
+        "key": "ctrl+f5",
+        "mac": "cmd+f5"
+    }]
 	},
 	"devDependencies": {
 		"vscode": "*"
