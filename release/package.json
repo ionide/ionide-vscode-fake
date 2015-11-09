@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"publisher": "Ionide",
 	"engines": {
-		"vscode": "*"
+		"vscode": "^0.10.0"
 	},
 	"main": "./fake",
 	"contributes": {
@@ -28,6 +28,11 @@
         "mac": "cmd+f5"
     }]
 	},
+	"activationEvents": [
+    "onCommand:fake.fakeBuild",
+		"onCommand:fake.cancelBuild",
+		"onCommand:fake.buildDefault"
+	],
 	"devDependencies": {
 		"vscode": "*"
 	},
