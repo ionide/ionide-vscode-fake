@@ -21,14 +21,14 @@ module FakeService =
     let mutable private BuildList = ResizeArray()
 
     let private loadParameters () =
-        let p = workspace.Globals.getPath ()
+        let p = workspace.Globals.rootPath
         linuxPrefix <- Settings.loadOrDefault (fun s -> s.Fake.linuxPrefix ) "sh"
         command <- Settings.loadOrDefault (fun s -> p + "/" + s.Fake.command ) (if Process.isWin () then p + "/" + "build.cmd" else p + "/" + "build.sh")
         script <- Settings.loadOrDefault (fun s -> p + "/" + s.Fake.build )  (p + "/" + "build.fsx")
         ()
 
     let private startBuild target =
-        let outputChannel = window.Globals.getOutputChannel "FAKE"
+        let outputChannel = window.Globals.createOutputChannel "FAKE"
         outputChannel.clear ()
         let proc = Process.spawnWithNotification command linuxPrefix target outputChannel
         let data = {Name = (if target = "" then "Default" else target); Start = DateTime.Now; End = None; Process = proc}
@@ -60,6 +60,7 @@ module FakeService =
         |> Seq.cast<Match>
         |> Seq.toArray
         |> Array.map(fun m -> m.Groups.[1].Value)
+        |> Promise.lift
         |> window.Globals.showQuickPick
         |> Promise.toPromise
         |> Promise.success startBuild
@@ -69,6 +70,7 @@ module FakeService =
         |> Seq.where (fun n -> n.End.IsNone)
         |> Seq.map (fun n -> n.Name)
         |> Seq.toArray
+        |> Promise.lift
         |> window.Globals.showQuickPick
         |> Promise.toPromise
         |> Promise.success cancelBuild
@@ -79,8 +81,8 @@ module FakeService =
 
 type Fake() =
     member x.activate(state:obj) =
-        let t = workspace.Globals.getPath ()
-        commands.Globals.registerCommand("fake.fakeBuild", FakeService.buildHandle |> unbox<CommandCallback>) |> ignore
-        commands.Globals.registerCommand("fake.cancelBuild", FakeService.cancelHandle |> unbox<CommandCallback>) |> ignore
-        commands.Globals.registerCommand("fake.buildDefault", FakeService.defaultHandle |> unbox<CommandCallback>) |> ignore
+        let t = workspace.Globals.rootPath
+        commands.Globals.registerCommand("fake.fakeBuild", FakeService.buildHandle |> unbox ) |> ignore
+        commands.Globals.registerCommand("fake.cancelBuild", FakeService.cancelHandle |> unbox) |> ignore
+        commands.Globals.registerCommand("fake.buildDefault", FakeService.defaultHandle |> unbox) |> ignore
         ()
