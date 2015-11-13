@@ -4,7 +4,7 @@
 	"publisher": "Ionide",
 	"description": "FAKE (F# Make) Support",
 	"categories":[
-		 "Others"
+		 "Other"
 	],
 	"license":"SEE LICENSE IN LICENSE.md",
 	"icon": "images/logo.png",
