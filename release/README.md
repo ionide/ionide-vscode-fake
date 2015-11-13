@@ -1,15 +1,39 @@
-#ionide-vscode-fake
+#Ionide-VSCode: FAKE
+
+It's part of [Ionide](http://ionide.io) plugin suite.
+F# IDE-like possibilities in Atom editor and Visual Studio Code
+
+## Features
+
+- Run any build target defined in Your project's FAKE build script
+
+## Configuration
+
+`ionide-fake` allows the user to override the default conventions used to find and run FAKE builds. To do so You need to create an `.ionide` file in the root folder of Your project opened by Atom. The configuration file uses the [TOML](https://github.com/toml-lang/toml) language.
+
+Here is the default configuration values used if the `.ionide` file doesn't exist or some entry is missing:
+
+```TOML
+[Fake]
+linuxPrefix = "mono"
+command = "build.cmd"
+build = "build.fsx"
+```
+
+* Linux Prefix - command used as prefix on Linux / Mac - usually `sh` or `mono`
+
+* Command - command executed as build taking build name as parameter - usually `build.cmd`, `build.sh`, `build.ps1`
+
+* Build - FAKE build script, which is parsed to obtain list of possible builds - usually `build.fsx`, `fake.fsx`
+
+## PATH settings
+
+* In case of using Mono version, `mono` must be in PATH.
 
 ## Contributing and copyright
 
-The project is hosted on [GitHub](https://github.com/ionide/ionide-fsharp) where you can [report issues](https://github.com/ionide/ionide-fsharp/issues), fork
+The project is hosted on [GitHub](https://github.com/ionide/ionide-vscode-fake) where you can [report issues](https://github.com/ionide/ionide-vscode-fake/issues), fork
 the project and submit pull requests.
 
-The library is available under [MIT license](https://github.com/ionide/ionide-fsharp/blob/master/LICENSE.md), which allows modification and
+The library is available under [MIT license](https://github.com/ionide/ionide-vscode-fake/blob/master/LICENSE.md), which allows modification and
 redistribution for both commercial and non-commercial purposes.
-
-## Code of Conduct
-
-This project adheres to No Code of Conduct. We are all adults. We accept everyone's contributions. Nothing else matters.
-
-For more information please visit the [No Code of Conduct](https://github.com/domgetter/NCoC) homepage.

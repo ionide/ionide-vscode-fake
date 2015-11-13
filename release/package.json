@@ -1,7 +1,21 @@
 {
 	"name": "ionide-fake",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"publisher": "Ionide",
+	"description": "FAKE (F# Make) Support",
+	"categories":[
+		 "Others"
+	],
+	"license":"SEE LICENSE IN LICENSE.md",
+	"icon": "images/logo.png",
+	"bugs": {
+		"url": "https://github.com/ionide/ionide-vscode-fake/issues"
+	},
+	"homepage": "http://ionide.io",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ionide/ionide-vscode-fake.git"
+	},
 	"engines": {
 		"vscode": "^0.10.0"
 	},
