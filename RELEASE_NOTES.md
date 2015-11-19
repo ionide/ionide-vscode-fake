@@ -1,3 +1,6 @@
+#### 1.0.1 - 19.11.2015
+* Directly cancel build if there is only one running task
+
 #### 1.0.0 - 18.11.2015
 * Public release
 
