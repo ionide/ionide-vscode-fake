@@ -70,14 +70,22 @@ module FakeService =
         |> Promise.success startBuild
 
     let cancelHandle () =
-        BuildList
-        |> Seq.where (fun n -> n.End.IsNone)
-        |> Seq.map (fun n -> n.Name)
-        |> Seq.toArray
-        |> Promise.lift
-        |> window.Globals.showQuickPick
-        |> Promise.toPromise
-        |> Promise.success cancelBuild
+        let targets =
+            BuildList
+            |> Seq.where (fun n -> n.End.IsNone)
+            |> Seq.map (fun n -> n.Name)
+            |> Seq.toArray
+        
+        if Array.length targets = 1 then
+            targets.[0]
+            |> Promise.lift
+            |> Promise.success cancelBuild
+        else
+            targets 
+            |> Promise.lift
+            |> window.Globals.showQuickPick
+            |> Promise.toPromise
+            |> Promise.success cancelBuild
 
     let defaultHandle () =
         do loadParameters ()
