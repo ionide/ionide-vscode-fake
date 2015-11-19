@@ -1,6 +1,6 @@
 {
 	"name": "Ionide-FAKE",
-	"version": "0.1.2",
+	"version": "1.0.0",
 	"publisher": "Ionide",
 	"description": "FAKE (F# Make) Support",
 	"categories":[

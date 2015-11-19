@@ -1,7 +1,7 @@
 #Ionide-VSCode: FAKE
 
 It's part of [Ionide](http://ionide.io) plugin suite.
-F# IDE-like possibilities in Atom editor and Visual Studio Code
+Using FAKE (F# Make) from VS Code.
 
 ## Features
 
