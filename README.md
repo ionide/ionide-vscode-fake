@@ -3,6 +3,8 @@
 It's part of [Ionide](http://ionide.io) plugin suite.
 Using FAKE (F# Make) from VS Code.
 
+[![Join the chat at https://gitter.im/ionide/ionide-project](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg?style=flat-square)](https://gitter.im/ionide/ionide-project?utm_source=share-link&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) --  [Need Help? You can find us on Gitter](https://gitter.im/ionide/ionide-project)
+
 ## Features
 
 - Run any build target defined in Your project's FAKE build script
