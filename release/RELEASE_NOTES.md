@@ -1,3 +1,6 @@
+#### 1.0.2 - 20.11.2015
+* First release with FAKE
+
 #### 1.0.1 - 19.11.2015
 * Directly cancel build if there is only one running task
 
