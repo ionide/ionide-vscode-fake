@@ -58,3 +58,6 @@ temp
 .vs
 *.js
 .vscode
+build.fsx.orig
+release.cmd
+paket-files
