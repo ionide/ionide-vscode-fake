@@ -43,7 +43,7 @@
     }]
 	},
 	"activationEvents": [
-    "onCommand:fake.fakeBuild",
+        "onCommand:fake.fakeBuild",
 		"onCommand:fake.cancelBuild",
 		"onCommand:fake.buildDefault"
 	],

@@ -11,7 +11,7 @@ open FunScript.TypeScript.vscode
 
 open Ionide
 open Ionide.VSCode
-
+ 
 module FakeService =
     type BuildData = {Name : string; Start : DateTime; mutable End : DateTime option; Process : ChildProcess}
 
@@ -28,22 +28,22 @@ module FakeService =
         ()
 
     let private startBuild target =
-        let outputChannel = window.Globals.createOutputChannel "FAKE"
-        outputChannel.clear ()
-        window.Globals.showInformationMessageOverload2 ("Build started", "Open")
-        |> Promise.toPromise
-        |> Promise.success(fun n -> if n = "Open" then outputChannel.show (2 |> unbox) )
-        |> ignore
-        let proc = Process.spawnWithNotification command linuxPrefix target outputChannel
-        let data = {Name = (if target = "" then "Default" else target); Start = DateTime.Now; End = None; Process = proc}
-        BuildList.Add data
-        proc.on("exit",unbox<Function>(fun (code : string) ->
-            if code ="0" then
-                window.Globals.showInformationMessage "Build completed" |> ignore
-            else
-                window.Globals.showErrorMessage "Build failed" |> ignore
-            data.End <- Some DateTime.Now)) |> ignore
-        ()
+        if JS.isDefined target then 
+            let outputChannel = window.Globals.createOutputChannel "FAKE"
+            outputChannel.clear ()
+            window.Globals.showInformationMessageOverload2 ("Build started", "Open")
+            |> Promise.toPromise
+            |> Promise.success(fun n -> if n = "Open" then outputChannel.show (2 |> unbox) )
+            |> ignore
+            let proc = Process.spawnWithNotification command linuxPrefix target outputChannel
+            let data = {Name = (if target = "" then "Default" else target); Start = DateTime.Now; End = None; Process = proc}
+            BuildList.Add data
+            proc.on("exit",unbox<Function>(fun (code : string) ->
+                if code ="0" then
+                    window.Globals.showInformationMessage "Build completed" |> ignore
+                else
+                    window.Globals.showErrorMessage "Build failed" |> ignore
+                data.End <- Some DateTime.Now)) |> ignore
 
 
     let cancelBuild target =
