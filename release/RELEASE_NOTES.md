@@ -1,3 +1,6 @@
+#### 1.0.4 - 01.12.2015
+* Dont start build on ESC
+
 #### 1.0.3 - 20.11.2015
 * First release with FAKE
 
