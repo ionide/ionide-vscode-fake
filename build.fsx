@@ -97,7 +97,7 @@ Target "RunScript" (fun () ->
 
 Target "InstallVSCE" ( fun _ ->
     killProcess "npm"
-    run npmTool "install -g vsce@beta" ""
+    run npmTool "install -g vsce" ""
 )
 
 Target "SetVersion" (fun _ ->
