@@ -119,12 +119,7 @@ Target "BuildPackage" ( fun _ ->
     |> Seq.iter(MoveFile "./temp/")
 )
 
-Target "PublishToGallery" ( fun _ -> 
-    let publisher =
-        match getBuildParam "vsce-publisher" with
-        | s when not (String.IsNullOrWhiteSpace s) -> s
-        | _ -> getUserPassword "VSCE Publisher: "
-        
+Target "PublishToGallery" ( fun _ ->       
     let token =
         match getBuildParam "vsce-token" with
         | s when not (String.IsNullOrWhiteSpace s) -> s
