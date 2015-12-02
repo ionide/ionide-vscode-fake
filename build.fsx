@@ -97,7 +97,7 @@ Target "RunScript" (fun () ->
 
 Target "InstallVSCE" ( fun _ ->
     killProcess "npm"
-    run npmTool "install -g vsce" ""
+    run npmTool "install -g vsce@beta" ""
 )
 
 Target "SetVersion" (fun _ ->
@@ -119,7 +119,7 @@ Target "BuildPackage" ( fun _ ->
     |> Seq.iter(MoveFile "./temp/")
 )
 
-Target "LoginToVSCE" ( fun _ ->
+Target "PublishToGallery" ( fun _ -> 
     let publisher =
         match getBuildParam "vsce-publisher" with
         | s when not (String.IsNullOrWhiteSpace s) -> s
@@ -131,12 +131,7 @@ Target "LoginToVSCE" ( fun _ ->
         | _ -> getUserPassword "VSCE Token: "
         
     killProcess "vsce"
-    run vsceTool (sprintf "login %s -pat %s" publisher token) "release"
-)
-
-Target "PublishToGallery" ( fun _ -> 
-    killProcess "vsce"
-    run vsceTool "publish" "release"
+    run vsceTool (sprintf "publish -pat %s" token) "release"
 )
 
 #load "paket-files/fsharp/FAKE/modules/Octokit/Octokit.fsx"
@@ -197,7 +192,6 @@ Target "Release" DoNothing
   ==> "InstallVSCE"
   ==> "BuildPackage"
   ==> "ReleaseGitHub"
-  // ==> "LoginToVSCE"
   ==> "PublishToGallery"
   ==> "Release"
 RunTargetOrDefault "Default"
