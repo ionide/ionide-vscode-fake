@@ -131,7 +131,7 @@ Target "PublishToGallery" ( fun _ ->
         | _ -> getUserPassword "VSCE Token: "
         
     killProcess "vsce"
-    run vsceTool (sprintf "publish -pat %s" token) "release"
+    run vsceTool (sprintf "publish --pat %s" token) "release"
 )
 
 #load "paket-files/fsharp/FAKE/modules/Octokit/Octokit.fsx"
