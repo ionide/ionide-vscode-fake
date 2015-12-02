@@ -63,7 +63,7 @@ let vsceTool =
     #if MONO
         "vsce"
     #else
-        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) </> "npm" </> "vsce.cmd"
+        "packages" </> "Node.js" </> "vsce.cmd" |> FullName
     #endif
     
 
