@@ -1,3 +1,6 @@
+#### 1.0.8 - 02.12.2015
+* Release with new VSCE
+
 #### 1.0.4 - 01.12.2015
 * Dont start build on ESC
 
