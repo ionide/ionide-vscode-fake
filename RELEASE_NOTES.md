@@ -1,3 +1,6 @@
+#### 1.0.9 - 05.01.2016
+* Fix path error
+
 #### 1.0.8 - 02.12.2015
 * Release with new VSCE
 
