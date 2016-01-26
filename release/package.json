@@ -52,6 +52,6 @@
 	},
 	"dependencies": {
 		"path": "*",
-    "toml": "*"
+        "toml": "*"
 	}
 }
