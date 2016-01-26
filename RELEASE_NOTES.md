@@ -1,3 +1,6 @@
+#### 1.0.10 - 26.01.2016
+* Fix package.json file
+
 #### 1.0.9 - 05.01.2016
 * Fix path error
 
