@@ -1,3 +1,6 @@
+#### 1.0.11 - 07.02.2016
+* Fix target detection
+
 #### 1.0.10 - 26.01.2016
 * Fix package.json file
 
