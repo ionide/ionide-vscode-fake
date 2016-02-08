@@ -59,7 +59,7 @@ module FakeService =
         do loadParameters ()
         script
         |> Globals.readFileSync
-        |> fun n -> (n.toString(), "Target \"([\\w.]+)\"")
+        |> fun n -> (n.toString(), "Target \"([^\\".]+)\"")
         |> Regex.Matches
         |> Seq.cast<Match>
         |> Seq.toArray
