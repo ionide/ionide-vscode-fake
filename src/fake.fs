@@ -11,7 +11,7 @@ open FunScript.TypeScript.vscode
 
 open Ionide
 open Ionide.VSCode
- 
+
 module FakeService =
     type BuildData = {Name : string; Start : DateTime; mutable End : DateTime option; Process : ChildProcess}
 
@@ -28,7 +28,7 @@ module FakeService =
         ()
 
     let private startBuild target =
-        if JS.isDefined target then 
+        if JS.isDefined target then
             let outputChannel = window.Globals.createOutputChannel "FAKE"
             outputChannel.clear ()
             window.Globals.showInformationMessageOverload2 ("Build started", "Open")
@@ -59,7 +59,7 @@ module FakeService =
         do loadParameters ()
         script
         |> Globals.readFileSync
-        |> fun n -> (n.toString(), "Target \"([^\\".]+)\"")
+        |> fun n -> (n.toString(), "Target \"([^\".]+)\"")
         |> Regex.Matches
         |> Seq.cast<Match>
         |> Seq.toArray
@@ -75,13 +75,13 @@ module FakeService =
             |> Seq.where (fun n -> n.End.IsNone)
             |> Seq.map (fun n -> n.Name)
             |> Seq.toArray
-        
+
         if Array.length targets = 1 then
             targets.[0]
             |> Promise.lift
             |> Promise.success cancelBuild
         else
-            targets 
+            targets
             |> Promise.lift
             |> window.Globals.showQuickPick
             |> Promise.toPromise
