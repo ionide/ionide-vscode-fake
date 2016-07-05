@@ -37,10 +37,22 @@
 			"FAKE"
 		],
 		"keybindings": [{
-        "command": "fake.buildDefault",
-        "key": "ctrl+f5",
-        "mac": "cmd+f5"
-    }]
+			"command": "fake.buildDefault",
+			"key": "ctrl+f5",
+			"mac": "cmd+f5"
+		}],
+		"configuration": {
+
+			"type": "object",
+			"title": "FAKE configuration",
+			"properties": {
+				"FAKE.autoshow": {
+					"type": "boolean",
+					"default": true,
+					"description": "Automatically shows FAKE output panel"
+				}
+			}
+    }
 	},
 	"activationEvents": [
         "onCommand:fake.fakeBuild",

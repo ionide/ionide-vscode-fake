@@ -19,6 +19,7 @@ module FakeService =
     let mutable private command = ""
     let mutable private script = ""
     let mutable private BuildList = ResizeArray()
+    let outputChannel = window.Globals.createOutputChannel "FAKE"
 
     let private loadParameters () =
         let p = workspace.Globals.rootPath
@@ -29,7 +30,6 @@ module FakeService =
 
     let private startBuild target =
         if JS.isDefined target then
-            let outputChannel = window.Globals.createOutputChannel "FAKE"
             outputChannel.clear ()
             window.Globals.showInformationMessageOverload2 ("Build started", "Open")
             |> Promise.toPromise
@@ -38,6 +38,8 @@ module FakeService =
             let proc = Process.spawnWithNotification command linuxPrefix target outputChannel
             let data = {Name = (if target = "" then "Default" else target); Start = DateTime.Now; End = None; Process = proc}
             BuildList.Add data
+            let cfg = workspace.Globals.getConfiguration ()
+            if cfg.get("FAKE.autoshow", true) then outputChannel.show ()
             proc.on("exit",unbox<Function>(fun (code : string) ->
                 if code ="0" then
                     window.Globals.showInformationMessage "Build completed" |> ignore
