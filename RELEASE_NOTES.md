@@ -1,3 +1,6 @@
+#### 1.1.0 - 05.07.2016
+* Automatically show FAKE output panel
+
 #### 1.0.11 - 07.02.2016
 * Fix target detection
 
