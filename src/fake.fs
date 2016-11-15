@@ -31,18 +31,16 @@ module FakeService =
     let private startBuild target =
         if JS.isDefined target then
             outputChannel.clear ()
-            window.Globals.showInformationMessageOverload2 ("Build started", "Open")
-            |> Promise.toPromise
-            |> Promise.success(fun n -> if n = "Open" then outputChannel.show (2 |> unbox) )
-            |> ignore
+            let startedMessage = window.Globals.setStatusBarMessage "Build started"
             let proc = Process.spawnWithNotification command linuxPrefix target outputChannel
             let data = {Name = (if target = "" then "Default" else target); Start = DateTime.Now; End = None; Process = proc}
             BuildList.Add data
             let cfg = workspace.Globals.getConfiguration ()
             if cfg.get("FAKE.autoshow", true) then outputChannel.show ()
             proc.on("exit",unbox<Function>(fun (code : string) ->
+                startedMessage.dispose() |> ignore
                 if code ="0" then
-                    window.Globals.showInformationMessage "Build completed" |> ignore
+                    window.Globals.setStatusBarMessage ("Build completed", 10000.0) |> ignore
                 else
                     window.Globals.showErrorMessage "Build failed" |> ignore
                 data.End <- Some DateTime.Now)) |> ignore
