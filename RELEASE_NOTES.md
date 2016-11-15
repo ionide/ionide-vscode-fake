@@ -1,4 +1,4 @@
-#### 1.2.0 - 15.11.2016
+#### 1.2.1 - 15.11.2016
 * Convert some messages to status bar messages
 
 #### 1.1.0 - 05.07.2016
