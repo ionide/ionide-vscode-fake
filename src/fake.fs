@@ -32,7 +32,7 @@ module FakeService =
         if JS.isDefined target then
             outputChannel.clear ()
             let startedMessage = window.Globals.setStatusBarMessage "Build started"
-            let proc = Process.spawnWithNotification command linuxPrefix target outputChannel
+            let proc = Process.spawnWithNotification command linuxPrefix (sprintf "\"%s\"" target) outputChannel
             let data = {Name = (if target = "" then "Default" else target); Start = DateTime.Now; End = None; Process = proc}
             BuildList.Add data
             let cfg = workspace.Globals.getConfiguration ()
