@@ -1,3 +1,6 @@
+#### 1.2.2 - 09.12.2016
+* Work with targets including spaces in name
+
 #### 1.2.1 - 15.11.2016
 * Convert some messages to status bar messages
 
