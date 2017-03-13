@@ -28,6 +28,22 @@ build = "build.fsx"
 
 * Build - FAKE build script, which is parsed to obtain list of possible builds - usually `build.fsx`, `fake.fsx`
 
+### Command Key Bindings
+
+When creating Command Palette key bindings for FAKE the command names are:
+
+* fake.fakeBuild
+* fake.buildDefault (default binding is ctrl+f5)
+* fake.cancelBuild
+
+For example, to launch the target list using shift+f5 add the following to the VS Code keybindings.json file:
+
+```json
+[
+    { "key": "shift+f5", "command": "fake.fakeBuild" }
+]
+```
+
 ## PATH settings
 
 * In case of using Mono version, `mono` must be in PATH.
