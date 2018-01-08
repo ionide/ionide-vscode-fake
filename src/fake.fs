@@ -64,7 +64,7 @@ module FakeService =
         |> Regex.Matches
         |> Seq.cast<Match>
         |> Seq.toArray
-        |> Array.map(fun m -> m.Groups.[1].Value)
+        |> Array.map(fun m -> m.Groups.[2].Value)
         |> Promise.lift
         |> window.Globals.showQuickPick
         |> Promise.toPromise
