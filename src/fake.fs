@@ -60,11 +60,11 @@ module FakeService =
         do loadParameters ()
         script
         |> Globals.readFileSync
-        |> fun n -> (n.toString(), "Target \"([^\".]+)\"")
+        |> fun n -> (n.toString(), "Target(\.Create)? \"([^\".]+)\"")
         |> Regex.Matches
         |> Seq.cast<Match>
         |> Seq.toArray
-        |> Array.map(fun m -> m.Groups.[1].Value)
+        |> Array.map(fun m -> m.Groups.[if m.Groups.Count = 2 then 2 else 1].Value)
         |> Promise.lift
         |> window.Globals.showQuickPick
         |> Promise.toPromise
