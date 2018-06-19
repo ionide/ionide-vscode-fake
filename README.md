@@ -1,4 +1,4 @@
-#Ionide-VSCode: FAKE
+# Ionide-VSCode: FAKE
 
 It's part of [Ionide](http://ionide.io) plugin suite.
 Using FAKE (F# Make) from VS Code.
